@@ -9,3 +9,4 @@
 
 rootProject.name = 'battleship'
 include 'battleship-models'
+include 'battleship-contract'
