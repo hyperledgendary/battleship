@@ -1,0 +1,10 @@
+[
+  {
+    "name": "underHat",
+    "policy": "OR('Org1MSP.member')",
+    "requiredPeerCount": 0,
+    "maxPeerCount": 3,
+    "blockToLive":99,
+    "memberOnlyRead": true
+  }
+]

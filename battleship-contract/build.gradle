@@ -13,7 +13,7 @@ group 'org.hyperledger.fabric.samples'
 version '1.0-SNAPSHOT'
 
 dependencies {
-    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:2.0.0-SNAPSHOT'
+    implementation 'org.hyperledger.fabric-chaincode-java:fabric-chaincode-shim:1.4.2-SNAPSHOT'
     implementation 'com.owlike:genson:1.5'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     testImplementation 'org.assertj:assertj-core:3.11.1'
@@ -23,9 +23,6 @@ dependencies {
 repositories {
     maven {
         url "$projectDir/repository"
-    }
-    maven {
-        url "https://nexus.hyperledger.org/content/repositories/snapshots/"
     }
     jcenter()
     maven { 
@@ -66,7 +63,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 1.0
+                minimum = 0.7
             }
         }
     }

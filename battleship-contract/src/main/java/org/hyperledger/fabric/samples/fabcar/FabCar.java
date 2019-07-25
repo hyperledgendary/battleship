@@ -4,6 +4,8 @@
 
 package org.hyperledger.fabric.samples.fabcar;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,7 @@ import com.owlike.genson.Genson;
 @Default
 public final class FabCar implements ContractInterface {
 
+    private static final String PRIVATE_DATA_COLLECTION = "underHat";
     private final Genson genson = new Genson();
 
     private enum FabCarErrors {
@@ -186,5 +189,28 @@ public final class FabCar implements ContractInterface {
         stub.putStringState(key, newCarState);
 
         return newCar;
+    }
+
+    @Transaction()
+    public void createPrivateThing(final Context ctx, final String key, final String thing) {
+        ChaincodeStub stub = ctx.getStub();
+
+        stub.putPrivateData(PRIVATE_DATA_COLLECTION, key, thing);
+    }
+
+    @Transaction()
+    public String readPrivateThing(final Context ctx, final String key) {
+        ChaincodeStub stub = ctx.getStub();
+
+        return stub.getPrivateDataUTF8(PRIVATE_DATA_COLLECTION, key);
+    }
+
+    @Transaction()
+    public String getPrivateThingHash(final Context ctx, final String key) {
+        ChaincodeStub stub = ctx.getStub();
+
+        byte[] hash = stub.getPrivateDataHash(PRIVATE_DATA_COLLECTION, key);
+
+        return hash == null ? "" : new String(hash, UTF_8);
     }
 }
