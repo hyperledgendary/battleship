@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+package battleship;
+
+option java_package = "com.example.battleship.proto";
+option java_outer_classname = "BattleshipProtos";
+
+message BoardCoordinate {
+    // TODO: probably a better way of representing a-j and 1-10! (Even just a string?!)
+    enum RowLabel {
+        A = 1;
+        B = 2;
+        C = 3;
+        D = 4;
+        E = 5;
+        F = 6;
+        G = 7;
+        H = 8;
+        I = 9;
+        J = 10;
+    }
+    required RowLabel row = 1;
+    required int32 column = 2;
+}
+
+message FleetSquare {
+    required string salt = 1;
+    required bool ship = 2 [default = false];
+}
+
+message GameSquare {
+    enum SquareState {
+        UNKNOWN = 0;
+        HIT = 1;
+        MISS = 2;
+    }
+
+    required SquareState state = 1 [default = UNKNOWN];
+}
